@@ -1,0 +1,525 @@
+/* These data were used to insert when the app used in-memory h2 database
+
+
+
+
+/* for table language
+ * languageId, languageName
+ */
+INSERT INTO language(language_id, language_name, language_code) values
+	(1, 'Hindi', 'hi'), 
+	(2, 'English', 'en'),
+	(3, 'Bengali', 'bn'),
+	(4, 'Marathi', 'mr'),
+	(5, 'Punjabi', 'pa'),
+	(6, 'Gujarati', 'gu'),
+	(7, 'Tamil', 'ta'),
+	(8, 'Telugu', 'te'),
+	(9, 'Kannada', 'kn'),
+	(10, 'Malayalam', 'ml'),
+	(11, 'Nepali', 'ne');
+
+
+/* for table state
+ * stateId, stateName, languageId, languageId1....languageId3
+ */
+INSERT  INTO state (state_id, state_name, language_id) values
+	(1, 'Uttar Pradesh', 1),
+	(2, 'Bihar', 11),
+	(3, 'Jharkhand', 1),
+	(4, 'Maharastra', 4),
+	(5, 'Rajasthan', 1),
+	(6, 'Gujrat', 6),
+	(7, 'Tamilnadu', 7),
+	(8, 'Andhra Pradesh', 8),
+	(9, 'Telangana', 8),
+	(10, 'Karnataka', 9),
+	(11, 'Kerala', 10);
+	
+/*for table city
+ * cityId, cityName, stateId, languageId  
+ */
+INSERT INTO city
+	(city_id, city_name, language_id, state_id) values
+	('1', 'Noida', 1, 1), 
+	('2', 'Prayagraj', 1, 1),
+	('3', 'Lucknow', 1, 1),
+	('4', 'Kanpur', 1, 1),
+	('5', 'Gorakhpur', 1, 1),
+	('6', 'Meerut', 1, 1);
+	
+	
+/*
+ * For table user
+ * user_id, block, dist, gram_sabha, state, app_version, created_time, email_id, followers, following, mobile, otp, otp_verify, post_published, status
+ */
+INSERT INTO user
+(user_id, block, dist, gram_sabha, state, app_version, created_time, email_id, followers, following, mobile, otp, otp_verify, post_published, status) values 
+(1, 'random block 1', 'lucknow', 'lucknow village', 'Uttar Pradesh', 'BETA VERSION', now(), 'random1@gmail.com', 10, 100, '7521094851',  'random1otp', '10', '0', '200'),
+(2, 'random block 2', 'prayagraj', 'allahabad village', 'Uttar Pradesh', 'BETA VERSION', now(), 'random2@gmail.com', 5, 10, '9918236327',  'random2otp', '11', '2', '200'),
+(3, 'random block 3', 'noida', 'okhla village', 'Uttar Pradesh', 'BETA VERSION', now(), 'random3@gmail.com', 21, 7, '9191758310',  'random3otp', '20', '50', '200'),
+(4, 'random block 4', 'delhi', 'seelampur village', 'Delhi', 'BETA VERSION', now(), 'ak93833@gmail.com', 277, 51, '5423738210',  'random4otp', '27', '300', '200');
+
+
+/*
+ * User Device for the above created users
+ * 
+ */
+INSERT INTO user_device
+(user_id, android_id, created_time, device_id, device_name, device_token, make, model, time_of_device) values
+(1, 'rand-android-id-1', now(), 'rand-device-id-1', 'Redmi', 'rand-device-token1', 'Xiaomi', 'Redme Note 5', now()),
+(2, 'rand-android-id-2', now(), 'rand-device-id-2', 'HTC', 'rand-device-token2', 'HTC', 'HTC Desire 820G PLUS dual sim', now()),
+(3, 'rand-android-id-3', now(), 'rand-device-id-3', 'Karbonn', 'rand-device-token3', 'Karbonn', 'Karbonn A11', now()),
+(4, 'rand-android-id-4', now(), 'rand-device-id-4', 'Samsung', 'rand-device-token4', 'Samsung', 'Samsung S10', now());
+
+
+/*
+ * User profile for a user with respective user_id.
+ * 
+ * Note => Here, city and city_id two columns exists, need to be normalized.
+ */
+INSERT INTO user_profile
+(user_id, android_version, astro_sign, block_id, city, city_id, dob, gram_sabha_id, language_id, login_type, name, profile_pick, state_id, token) values
+(1, '8.1.0 ', 'Virgo', 'opted-block-1', 'arbital city', '1', 'unwn dob', 'unwn gram', 1, 'google', 'Sandeep Kumar', 'picUrlSandeep', 1, 'randomly token'),
+(2, '4.4 ', 'Cancer', 'random-block-2', 'opted city', '1', 'unwn dob', 'unwn gram', 1, 'google', 'Sanjay Kumar', 'picUrlSanjay', 1, 'selected token'),
+(3, '5.0 ', 'Lio', 'random-block-3', 'grounded city', '1', 'unwn dob', 'unwn gram', 1, 'facebook', 'Anurag Singh', 'picUrlAnurag', 1, 'custom token'),
+(4, '8.1.0 OPM1.171010.019', 'Aries', 'arbitrary-block-4', 'random city', '1', 'unwn dob', 'unwn gram', 1, 'google', 'Asheesh Kumar', 'picUrlAsheesh', 1, 'dynamically token');
+
+
+/*
+ * User source for a user with respective user_id
+ */
+INSERT INTO user_source
+(user_id, created_time, device_id, ip, source, updated_time, utm_campaign, utm_content, utm_medium, utm_source, utm_term) values
+(1, now(), 'rand-device-id-1', '127.0.0.1', 'referred', now(), 'unwn cmpn1', 'unwn cntnt1', 'unwn medium1', 'unwn source1', 'utm term1'),
+(2, now(), 'rand-device-id-2', '127.0.0.2', 'installed', now(), 'unwn cmpn2', 'unwn cntnt2', 'unwn medium2', 'unwn source2', 'utm term2'),
+(3, now(), 'rand-device-id-3', '127.0.0.3', 'received', now(), 'unwn cmpn3', 'unwn cntnt3', 'unwn medium3', 'unwn source3', 'utm term3'),
+(4, now(), 'rand-device-id-4', '127.0.0.4', 'cracked', now(), 'unwn cmpn4', 'unwn cntnt4', 'unwn medium4', 'unwn source4', 'utm term4');
+
+
+
+/**
+ * For table news_category
+ */
+INSERT INTO news_category
+(category_id, category_name, language_id, priority) values
+(1, 'Headlines', 1, 10),
+(2, 'Coronavirus', 1, 1),
+(3, 'Entertainment', 1, 5),
+(4, 'Geopolitics', 1, 7),
+(5, 'World', 1, 5),
+(6, 'Editorial', 1, 5),
+(7, 'Politics', 1, 3),
+(8, 'Breaking News', 1, 1);
+
+
+/*
+ * For table news
+ */
+INSERT INTO news 
+(news_id, catagory_id, city_id, date_time, language_id, likes, news_location, state_id, status, unique_id, views) values
+(1, 1, 2, now(), 1, 0, 'lati-longi-1', 1, 'ACTIVE', 'unique-1', 0),
+(2, 1, 2, now(), 1, 0, 'lati-longi-2', 1, 'ACTIVE', 'unique-2', 0),
+(3, 1, 2, now(), 1, 0, 'lati-longi-3', 1, 'ACTIVE', 'unique-3', 0),
+(4, 1, 2, now(), 1, 0, 'lati-longi-4', 1, 'ACTIVE', 'unique-4', 0),
+(5, 1, 2, now(), 1, 0, 'lati-longi-5', 1, 'ACTIVE', 'unique-5', 0);
+
+
+/*
+ * news_details table for the news with respective news_id
+ */
+INSERT INTO news_details
+(news_id, news_headline, news_discription_text, news_discription_audio_url, news_image_url, news_video_url, news_creator, dislikes, share, comment, flage, news_url, userid) values
+(1, 'Headline-1', 'news-descp-1', 'news-audio-url-1', 'news-img-url-1', 'news-vid-url-1', 'creator-1', 0, 0, 0, 0, 'news-url-1', 1),
+(2, 'Headline-2', 'news-descp-2', 'news-audio-url-2', 'news-img-url-2', 'news-vid-url-2', 'creator-1', 0, 0, 0, 0, 'news-url-2', 1),
+(3, 'Headline-3', 'news-descp-3', 'news-audio-url-3', 'news-img-url-3', 'news-vid-url-3', 'creator-2', 0, 0, 0, 0, 'news-url-3', 2),
+(4, 'Headline-4', 'news-descp-4', 'news-audio-url-4', 'news-img-url-4', 'news-vid-url-4', 'creator-3', 0, 0, 0, 0, 'news-url-4', 3),
+(5, 'Headline-5', 'news-descp-5', 'news-audio-url-5', 'news-img-url-5', 'news-vid-url-5', 'creator-4', 0, 0, 0, 0, 'news-url-5', 4);
+
+
+/*
+ * For table MoreNews
+ */
+INSERT INTO more_news
+(id, language_id, date_time, status, image_url, name, action_url) values
+(1, 1, now(), '1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXqq3BVxiBttERYugJ4GUjhVUgfpBN3IkJId9GHPUtfaGqM9BQ', 'jagran', 'https://m.jagran.com/'),
+(2, 1, now(), '1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRctLjAvFe2Qeqpcn6UVaqT_s2MCUvvgNSe3105j4s9LxKGIJ3H', 'bhaskar', 'https://m.bhaskar.com/'),
+(3, 1, now(), '1', 'https://spiderimg.amarujala.com/assets/images/2017/02/11/750x506/amar-ujala-logo_1486755408.jpeg', 'amarujala', 'https://m.amarujala.com/uttar-pradesh'),
+(4, 2, now(), '1', 'https://images-eu.ssl-images-amazon.com/images/I/310vvusqwQL.png', 'ndtv', 'https://www.ndtv.com/'),
+(5, 2, now(), '1', 'https://exchange4media.gumlet.com/news-photo/100947-expresslogo.jpg?format=webp&w=750&dpr=1.5', 'indian express', 'https://indianexpress.com/'),
+(6, 2, now(), '1', 'https://media.glassdoor.com/sqll/460847/the-hindu-squarelogo.png', 'the hindu ', 'https://www.thehindu.com/');
+
+
+
+
+/*
+ * For table DbConfig
+*/
+INSERT INTO db_config
+(created_time, property_name, property_value, updated_time) values
+(now(), "Email", "ak93833@gmail.com", now() ),
+(now(), "ORGANISATION_NAME", "VOKAL_INTERNET_MEDIA_PRIVATE_LIMITED", now() ),
+(now(), "Password", "ForgotPassword", now() );
+
+
+/*
+ * DEFINING SOME APPLICATION WIDE CONSTANT
+ * 
+ * SHARE_TEXT
+ * WELCOME_TEXT
+ * SAVE_DIRECTORY_FOR_UPLOAD/UPLOAD_DIR
+ * SAVE_SUBDIRECTORY_NEWS/NEWS_DIR
+ * SAVE_SUBDIRECTORY_KYC/KYC_DIR
+ * PUSH_NOTIFICATION_DESTINATION
+ */
+/*
+	create table db_config (
+       property_name varchar(255) not null,
+        created_time datetime(6),
+        property_value varchar(255),
+        updated_time datetime(6),
+        primary key (property_name)
+    ) engine=InnoDB
+*/
+
+
+
+
+*/
+
+
+
+
+
+/* The following data are being used when the app was being tested with mysql local database */
+
+
+INSERT INTO state
+(state_id, state_name, language_id) values 
+ (1, 'उततरपरदश', 1),
+ (2, 'बिहार', 1), 
+ (3, 'उततराखणड', 1), 
+ (4, 'राजसथान', 1),
+ (5, 'झारखणड',1),
+ (6, 'मधयपरदश',1),
+ (7, 'महारषटरा', 1),
+ (8, 'हरियाणा', 1),
+ (9, 'छत्तीसगढ़', 1),
+  (10, 'हिमाचल प्रदेश', 1);
+  
+  
+  
+ INSERT INTO language
+ (language_id, language_name, code) values
+ (1, 'हिन्दी', 'hi'),
+ (2,'English', 'en'),
+ (3, 'बङ्गला', 'bn'),
+ (4, 'गुजराती', 'gu'),
+ (5, 'तेलगू', 'te'),
+ (6, 'तमिल', 'ta'),
+ (8, 'पंजाबी', 'pa'),
+ (9, 'कन्नडा', 'kn'),
+ (11, 'नेपाली', 'ne'),
+ (12, 'मलयालम', 'ml');
+
+ 
+ INSERT INTO news_category
+(categoryId, categoryName, priority, language_id) values
+(1, 'Headlines', 1, 1),
+(2, 'Coronavirus', 1, 1),
+(3, 'Entertainment', 10, 1),
+(4, 'Geopolitics', 2, 1),
+(5, 'World', 3, 1),
+(6, 'Editorial', 4, 1),
+(7, 'Politics', 10, 1),
+(8, 'Breaking News', 1, 1);
+
+
+
+INSERT INTO city
+(city_id, city_name, state_id, language_id) values
+(1, "लखनउ", 1, 1),
+(2, "वाराणसी" ,1, 1),
+(3,"बरेली" ,1, 1),
+(4, "मुरादाबाद",1, 1),
+(5,"मेरठ" ,1, 1),
+(6, "आगरा",1, 1),
+(7, "अलीगढ़",1, 1),
+(8, "प्रयागराज",1, 1),
+(9, "गोरखपुर",1, 1),
+(10, "कानपुर",1, 1),
+(11,"बाराबंकी" ,1, 1),
+(12,"आजमगढ़" ,1, 1),
+(13,"बलिया" ,1, 1),
+(14,"भदोही" ,1, 1),
+(15,"चंदौली" ,1, 1),
+(16,"गाजीपुर" ,1, 1),
+(17,"जौनपुर" ,1, 1),
+(18,"मऊ" ,1, 1),
+(19,"मिर्जापुर" ,1, 1),
+(20,"सोनभद्र" ,1, 1),
+(21,"बस्ती" ,1, 1),
+(22,"कुशीनगर" ,1, 1),
+(23,"देवरिया" ,1, 1),
+(24,"महाराजगंज" ,1, 1),
+(25,"संतकबीरनगर" ,1, 1),
+(26,"सिद्धार्थनगर" ,1, 1),
+(27,"बागपत" ,1, 1),
+(28,"शामली" ,1, 1),
+(29,"बिजनौर" ,1, 1),
+(30,"बुलन्दशहर" ,1, 1);
+
+
+INSERT INTO MoreNews
+(id, language_id, date_time, status, image_url, Name, action_url) values
+(1, 1, now(), '1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXqq3BVxiBttERYugJ4GUjhVUgfpBN3IkJId9GHPUtfaGqM9BQ', 'jagran', 'https://m.jagran.com/'),
+(2, 1, now(), '1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRctLjAvFe2Qeqpcn6UVaqT_s2MCUvvgNSe3105j4s9LxKGIJ3H', 'bhaskar', 'https://m.bhaskar.com/'),
+(3, 1, now(), '1', 'https://spiderimg.amarujala.com/assets/images/2017/02/11/750x506/amar-ujala-logo_1486755408.jpeg', 'amarujala', 'https://m.amarujala.com/uttar-pradesh'),
+(4, 2, now(), '1', 'https://images-eu.ssl-images-amazon.com/images/I/310vvusqwQL.png', 'ndtv', 'https://www.ndtv.com/'),
+(5, 2, now(), '1', 'https://exchange4media.gumlet.com/news-photo/100947-expresslogo.jpg?format=webp&w=750&dpr=1.5', 'indian express', 'https://indianexpress.com/'),
+(6, 2, now(), '1', 'https://media.glassdoor.com/sqll/460847/the-hindu-squarelogo.png', 'the hindu ', 'https://www.thehindu.com/');
+
+
+
+/* This data is for English(languageid=2) version of getNewsTutorials */
+
+INSERT INTO HeaderTitle
+(languageId, headerTitle, headerLogo) VALUES 
+(2, 'How to create best news', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(2, 'Head Lines', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(2, 'Description', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(2, 'When and where', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(2, 'Fake news / Rumors', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg');
+
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('How to create best news', 1, 'To show each aspect of news send one video which is clearly shooted.', TRUE),
+('How to create best news', 2, 'Record Videos horizontally', TRUE),
+('How to create best news', 3, 'Only consider necessary shots to  shoot video ( at least  one minute  and maximum 3 min)', TRUE),
+('How to create best news', 4, 'Please send news in comprehensive  form so that we can approve it quickly', TRUE);
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('Head Lines', 1, 'People don\'t like long headlines so it is suggested to have headlines less than 8 words', TRUE),
+('Head Lines', 2, 'It would be better no to reveal major facts related to news in headlines', TRUE),
+('Head Lines', 3, 'The headline should generate curiosity to viewsers', TRUE),
+('Head Lines', 4, 'It would be better to use actionable  words in headlines', FALSE);
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('Description', 1, 'what , when , where and why should come in first two paragraphs', TRUE),
+('Description', 2, 'Further paragraphs should have other aspects of news', TRUE),
+('Description', 3, 'Take a pause after each line you added in story ', TRUE),
+('Description', 4, 'End your story with a relevant question ', FALSE);
+
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES	
+('When and where', 1, 'Mention real place and time of story clearly ', TRUE),
+('When and where', 2, 'To avoid mess up select location correctly ', TRUE);
+
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES	
+('Fake news / Rumors', 1, 'Your should not be biased against some person or party ', TRUE),
+('Fake news / Rumors', 2, 'Before submitting news you should ensure to collect all evidence and facts', TRUE),
+('Fake news / Rumors', 3, 'Please do not post news copied from whats up or face book', FALSE);
+
+
+/* This data is for Hindi(languageid=1) version of getNewsTutorials */
+INSERT INTO HeaderTitle
+(languageId, headerTitle, headerLogo) VALUES 
+(1, 'अच्छी खबर कैसे बनाएं', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(1, 'प्रमुख समाचार', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(1, 'विवरण', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(1, 'कब और कहाँ', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(1, 'फेक न्यूज / अफवाहें', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg');
+
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('अच्छी खबर कैसे बनाएं', 1, 'समाचार के प्रत्येक पहलू को दिखाने के लिए एक वीडियो भेजें जो स्पष्ट रूप से शूट किया गया हो।', TRUE),
+('अच्छी खबर कैसे बनाएं', 2, 'वीडियो क्षैतिज रूप से रिकॉर्ड करें', TRUE),
+('अच्छी खबर कैसे बनाएं', 3, 'वीडियो शूट करने के लिए केवल आवश्यक शॉट्स पर विचार करें (कम से कम एक मिनट और अधिकतम 3 मिनट)', TRUE),
+('अच्छी खबर कैसे बनाएं', 4, 'कृपया समाचार को व्यापक रूप में भेजें ताकि हम इसे शीघ्रता से अनुमोदित कर सकें', TRUE);
+
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('प्रमुख समाचार', 1, 'लोगों को लंबी शीर्षक पसंद नहीं है इसलिए यह सुझाव दिया जाता है कि शीर्षक 8 शब्दों से कम के हो', TRUE),
+('प्रमुख समाचार', 2, 'बेहतर होगा कि समाचारों से जुड़े प्रमुख तथ्यों को शीर्षक में न रखें', TRUE),
+('प्रमुख समाचार', 3, 'शीर्षक को दर्शकों के लिए उत्सुकता पैदा करनी चाहिए', TRUE),
+('प्रमुख समाचार', 4, ' शीर्षक में कार्यवाही वाले शब्दों का इस्तेमाल करें', FALSE);
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('विवरण', 1, 'पहले दो पैराग्राफ में क्या, कब, कहां और क्यों आना चाहिए', TRUE),
+('विवरण', 2, 'आगे के पैराग्राफ में समाचार के अन्य पहलू होने चाहिए', TRUE),
+('विवरण', 3, 'विवरण में आपके द्वारा जोड़ी गई प्रत्येक पंक्ति के बाद एक विराम लें', TRUE),
+('विवरण', 4, 'एक प्रासंगिक प्रश्न के साथ अपनी कहानी समाप्त करें', FALSE);
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES	
+('कब और कहाँ', 1, 'स्पष्ट रूप से घटना की वास्तविक जगह और समय का उल्लेख करें', TRUE),
+('कब और कहाँ', 2, 'विसंगतियों से बचने के लिए सही जगह चुनें', TRUE);
+
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES	
+('फेक न्यूज / अफवाहें', 1, 'आपका किसी व्यक्ति या पार्टी के खिलाफ पक्षपात नहीं होना चाहिए', TRUE),
+('फेक न्यूज / अफवाहें', 2, 'समाचार प्रस्तुत करने से पहले सुनिश्चित करें की आपने सभी सबूतों और तथ्यों को इकट्ठा किया', TRUE),
+('फेक न्यूज / अफवाहें', 3, 'कृपया WhatsApp या Facebook से कॉपी की गई खबरें पोस्ट न करें', FALSE);
+
+/* The above data was updated with below data */
+
+INSERT INTO HeaderTitle
+(languageId, headerTitle, headerLogo) VALUES
+(2, 'Know what to do to make news', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(2, 'Before posting news, try to follow the suggestion given below', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(2, 'What not to do', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg');
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('Know what to do to make news', 1, 'In relation to the incident write/tell us, what happened, when it happened, where it happened, who was there, why it happened and how it happened. Thread - 5W + 1H', TRUE),
+('Know what to do to make news', 2, 'Make sure to insert a photo or video related to the news.', TRUE),
+('Know what to do to make news', 3, 'If possible, please share details of related persons like their phone number, address etc.', TRUE);
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('Before posting news, try to follow the suggestion given below', 1, 'Try to talk to the relevant department related to the news and also put his view/side into it.', TRUE),
+('Before posting news, try to follow the suggestion given below', 2, 'As soon as you get any new information regarding the incident, you should provide us immediately.', TRUE),
+('Before posting news, try to follow the suggestion given below', 3, 'At the end of the news, you can write your phone number and email id.', TRUE);
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('What not to do', 1, 'It is the responsibility of our editorial team to publish the news, which will publish at its discretion. Do not inquire about this.', FALSE),
+('What not to do', 2, 'You cannot take money from the public in lieu of posting news on our app.', FALSE),
+('What not to do', 3, 'We do not demand money from the public in lieu of posting news. It is a legal offense to do so.', FALSE);
+
+
+
+INSERT INTO HeaderTitle
+(languageId, headerTitle, headerLogo) VALUES
+(1, 'खबर पोस्ट करने से पहले जरूर करे', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(1, 'पोस्ट करने से पहले नीचे दिये गए सुझाव का पालन करने की कोशिश करें', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg'),
+(1, 'क्या नहीं करना है', 'https://reliable4you.com/wp-content/uploads/2017/01/rules_do_donts.jpg');
+
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('खबर पोस्ट करने से पहले जरूर करे', 1, 'घटना के संबंध में बताइये कि क्या (What) हुआ, कब(When) हुआ, कहां (Where) हुआ, कौन-कौन (Who) था,  क्यों (Why) हुआ  और  कैसे (How) हुआ. सूत्र – 5W+1H', TRUE),
+('खबर पोस्ट करने से पहले जरूर करे', 2, 'खबर से संबंधित तस्वीर या वीडियो अवश्य डालें.', TRUE),
+('खबर पोस्ट करने से पहले जरूर करे', 3, 'संबंधित व्यक्तियों का ब्यौरा जैसे फोन नंबर आदि भी दे सकते हैं.', TRUE);
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('पोस्ट करने से पहले नीचे दिये गए सुझाव का पालन करने की कोशिश करें', 1, 'खबर से संबंधित विभाग से बात करके उसका पक्ष भी डालें.', TRUE),
+('पोस्ट करने से पहले नीचे दिये गए सुझाव का पालन करने की कोशिश करें', 2, 'बाद में जुटाई गई / मिली जानकारी भी अवश्य पोस्ट करें.', TRUE),
+('पोस्ट करने से पहले नीचे दिये गए सुझाव का पालन करने की कोशिश करें', 3, 'खबर के नीचे आप अपना नंबर और ईमेल आईडी डाल सकते हैं.', TRUE);
+
+INSERT INTO HeaderContent
+(headerTitle, id, text, status) VALUES
+('क्या नहीं करना है', 1, 'खबर प्रकाशित करना हमारे संपादकीय टीम का दायित्व है, जो अपने विवेक से ही खबरें प्रकाशित करेगी. इस विषय में पूछताछ मत करिये.', FALSE),
+('क्या नहीं करना है', 2, ' पैसे लेकर किसी की खबर को मत पोस्ट करें.', FALSE),
+('क्या नहीं करना है', 3, 'हम पैसे लेकर खबरें नहीं छापते हैं. ऐसा करना कानूनी तौर पर अपराध है.', FALSE);
+
+
+/*Following records were added for fetching properties based on language, fetching propertyList and fetching list based on language*/
+/* For language based property list*/
+INSERT INTO DbConfig(propertyName, propertyValue, languageId) VALUES
+('REPORT_REASONS', 'हिंसक या भडकाऊ ', 1),
+('REPORT_REASONS', 'अश्लील या आपत्तिजनक ', 1),
+('REPORT_REASONS', 'फर्जी या अनचाहा ', 1), 
+('REPORT_REASONS', 'मै इससे सहमत नही हूँ ', 1),
+('REPORT_REASONS', 'स्पैम', 1),
+('REPORT_REASONS', 'अन्य', 1),
+('REPORT_REASONS', 'Violent', 2),
+('REPORT_REASONS', 'Pornographic content', 2),
+('REPORT_REASONS', 'Fake or unwanted', 2), 
+('REPORT_REASONS', 'I don\'t agree', 2),
+('REPORT_REASONS', 'Spam', 2),
+('REPORT_REASONS', 'Others', 2);
+
+/* For property based on languageId */
+
+INSERT INTO DbConfig(propertyName, propertyValue, languageId) VALUES 
+('KYC_DONE_MSG', 'बधाई हो, आपने अपने बीमा रजिस्ट्रेशन की प्रक्रिया पूरी कर ली है. हम आपका डाटा न्यू इंडिया इंश्योरेंस कंपनी को भेज रहे हैं. आप 7 दिन के बाद अपनी पॉलिसी को इसी App के जरिए डाउनलोड कर सुरक्षित रख सकते हैं.', 1),
+('KYC_DONE_MSG', 'Congratulations, You have completed insurance registration process. We are sending your data to New India Insurance Company. After 7 days you can download your policy and save.', 2),
+('INVITE_TEXT', 'अपने आस पास की स्थानीय खबरों को पाने के लिए वोकल न्यूज एप्प डाउनलोड करें ', 1),
+('INVITE_TEXT', 'Hey, To get especially curated local news download Vocal Local News app', 2),
+('REPORT_TEXT', 'आपकी शिकायत का मुख्य कारण क्या है? ', 1),
+('REPORT_TEXT', 'What is the reason for reporting', 2),
+('CAMERA', 'कैमरा', 1),
+('CAMERA', 'Camera', 2),
+('GALARY', 'गैलरी', 1),
+('GALARY', 'Galary', 2),
+('CHOOSE_OPTIONS', 'न्यूज बनाने के लिए विकल्प चुनें', 1);
+('CHOOSE_OPTIONS', 'To create News Choose option', 2);
+
+INSERT INTO DbConfig(propertyName, propertyValue, languageId) VALUES 
+('TNC_POPUP_LIST', 'Only those aged 18 to 50 years will have insurance.', 2),
+('TNC_POPUP_LIST', 'You will not have to un-install the app until the insurance period.', 2),
+('TNC_POPUP_LIST', 'You have to open the app at least 1 time in 1 week.', 2),
+('TNC_POPUP_LIST', 'Your insurance will be effective within 7 days of verification.', 2),
+('TNC_POPUP_LIST', 'Fill the information correctly otherwise there may be a problem during the claim.', 2);
+
+INSERT INTO DbConfig(propertyName, propertyValue, languageId) VALUES
+('TNC_HEADING', 'Take care of family, protect yourself', 2);
+
+
+/* For adding StateName at Runtime as Category */
+ALTER TABLE state ADD COLUMN category_id INTEGER;
+/* updating */
+UPDATE state SET category_id=1001 where state_name='उत्तर प्रदेश';
+UPDATE state SET category_id=1002 where state_name='बिहार';
+
+ALTER TABLE state ADD COLUMN alternate_name VARCHAR(255);
+
+INSERT INTO state(state_name, category_id, alternate_name) VALUES 
+('Uttar Pradesh', 2001, 'Uttar Pradesh'),
+('Bihar', 2002, 'Bihar');
+
+UPDATE state SET alternate_name='Uttar Pradesh' where category_id=1001;
+UPDATE state SET alternate_name='Bihar' where category_id=1002;
+UPDATE state SET alternate_name='Uttarakhand' where state_name='उत्तराखंड';
+UPDATE state SET category_id=1003 where  state_name='उत्तराखंड';
+
+
+
+/* creating table for state mapping */
+CREATE TABLE `state_mapping` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `state_id` bigint(20) DEFAULT '0',
+  `state_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `alternate_name` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1; 
+/* Inserting data */
+INSERT INTO state_mapping(state_name, alternate_name) values
+('Uttar Pradesh', 'Uttar Pradesh, उत्तरप्रदेश'),
+('Bihar', 'Bihar, बिहार'),
+('Uttarakhand', 'Uttarakhand, उत्तराखण्ड'),
+('Rajasthan', 'Rajasthan, राजस्थान'),
+('Jharkhand', 'Jharkhand, झारखण्ड'),
+('Madhya Pradesh', 'Madhya Pradesh, मध्यप्रदेश'),
+('Haryana', 'Haryana, हरियाणा'),
+('Chhattisgarh', 'Chhattisgarh, छत्तीसगढ़'), 
+('Himachal Pradesh', 'Himachal Pradesh, हिमाचल प्रदेश'),
+('Maharashtra', 'Maharashtra, महाराष्ट्र');
+
+UPDATE state SET category_id=1004, alternate_name='Rajasthan' where state_name='राजस्थान';
+UPDATE state SET category_id=1005, alternate_name='Jharkhand' where state_name='झारखंड';
+UPDATE state SET category_id=1006, alternate_name='Madhya Pradesh' where state_name='मध्य प्रदेश';
+
+// state_name need to be updated before using this query
+UPDATE state SET state_name='महाराष्ट्र' where state_id=7;
+UPDATE state SET category_id=1007, alternate_name='Maharashtra' where state_name='महाराष्ट्र';
+
+UPDATE state SET state_name='हरियाणा' where state_id=8;
+UPDATE state SET category_id=1008, alternate_name='Haryana' where state_name='हरियाणा';
+
+UPDATE state SET category_id=1009, alternate_name='Chhattisgarh' where state_name='छत्तीसगढ';
+UPDATE state SET category_id=1010, alternate_name='Himachal Pradesh' where state_name='हिमाचल प्रदेश';
+
+

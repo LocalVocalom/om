@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+
+	<!-- <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"> 
+		<encoder> <pattern>%date %level [%file:%line] %msg%n</pattern> </encoder> 
+		</appender> -->
+
+	<property resource="application.properties"/>
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<encoder>
+			<pattern>%date %level [%file:%line] %msg%n</pattern>
+		</encoder>
+		<file>/home/anurag/logs/api/vocalApi.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/home/anurag/logs/api/vocalApi.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+
+	</appender>
+
+
+
+	<logger name="org.springframework" level="WARN">
+	</logger>
+
+	<logger name="com.ning" level="WARN">
+	</logger>
+
+	<logger name="org.jboss.netty" level="WARN">
+	</logger>
+
+	<logger name="org.apache.activemq" level="WARN">
+	</logger>
+	
+	<logger name="com.vocal" level="INFO">
+	</logger>
+	
+	<!-- Turn on debug logging for HikariCP connection pool. -->
+	<logger name="com.zaxxer.hikari" level="DEBUG">
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="FILE" />
+	</root>
+
+</configuration>

@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "file.upload-dir",
+    "type": "java.lang.String",
+    "description": "A description for 'file.upload-dir'"
+  },
+  {
+    "name": "INTERVAL_HOUR",
+    "type": "java.lang.String",
+    "description": "A description for 'INTERVAL_HOUR'"
+  },
+  {
+    "name": "INTERVAL_HOUR",
+    "type": "java.lang.String",
+    "description": "A description for 'INTERVAL_HOUR'"
+  },
+  {
+    "name": "INTERVAL_HOUR",
+    "type": "java.lang.String",
+    "description": "A description for 'INTERVAL_HOUR'"
+  },
+  {
+    "name": "INTERVAL_HOUR",
+    "type": "java.lang.String",
+    "description": "A description for 'INTERVAL_HOUR'"
+  },
+  {
+    "name": "INTERVAL_HOUR",
+    "type": "java.lang.String",
+    "description": "A description for 'INTERVAL_HOUR'"
+  }
+]}
